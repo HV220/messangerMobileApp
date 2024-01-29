@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/userItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@android:drawable/ic_notification_overlay"
+            tools:text="Name user and age" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

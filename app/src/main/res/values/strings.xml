@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">messanger</string>
+    <string name="email">Введите email</string>
+    <string name="password">Введите пароль</string>
+    <string name="enter">Войти</string>
+    <string name="forgotPassword">Забыли пароль</string>
+    <string name="registration">Регистрация</string>
+    <string name="messengerTitle">Messenger</string>
+    <string name="logOut">Разлогинится</string>
 </resources>
