@@ -1,4 +1,4 @@
-package com.example.messanger.models.modelviews;
+package com.example.messanger.models.controllers;
 
 import android.app.Application;
 

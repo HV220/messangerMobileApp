@@ -13,5 +13,6 @@
     <string name="nameHint">Enter your name</string>
     <string name="lastNameHint">Enter your last name</string>
     <string name="oldHint">Enter your age</string>
-    <string name="was_successful_added">был успешно добавлен.</string>
+    <string name="was_successful_added">was successfully added.</string>
+    <string name="change_password">Change password</string>
 </resources>

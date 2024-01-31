@@ -1,9 +1,9 @@
 package com.example.messanger.views;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,8 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.messanger.R;
-import com.example.messanger.models.modelviews.AuthenticationModelView;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.example.messanger.models.controllers.AuthenticationModelView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = UsersActivity.createIntent(this);
                         startActivity(intent);
                     })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    });
+                    .addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show());
         });
 
         registration.setOnClickListener(v -> {
@@ -52,17 +49,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         resetPassword.setOnClickListener(v -> {
-            String userEmail = editTextTextEmailAddress.getText().toString();
 
-            modelView.getAuth().sendPasswordResetEmail(userEmail).addOnSuccessListener(unused ->
-                            Toast.makeText(MainActivity.this, "Password was successfully changed",
-                                    Toast.LENGTH_LONG).show())
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
+            Intent intent = ResetPasswordActivity.createIntent(MainActivity.this);
+            startActivity(intent);
+
         });
     }
 
@@ -74,5 +64,11 @@ public class MainActivity extends AppCompatActivity {
         resetPassword = findViewById(R.id.resetPassword);
         registration = findViewById(R.id.registration);
         button = findViewById(R.id.button);
+    }
+
+    public static Intent createIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+
+        return intent;
     }
 }

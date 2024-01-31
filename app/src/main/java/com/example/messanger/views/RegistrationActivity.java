@@ -10,11 +10,11 @@ import android.os.Bundle;
 
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.example.messanger.R;
-import com.example.messanger.models.modelviews.AuthenticationModelView;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.messanger.models.controllers.AuthenticationModelView;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -45,32 +45,14 @@ public class RegistrationActivity extends AppCompatActivity {
             String lastName = editTextTextLastName.getText().toString().trim();
             String age = editTextOld.getText().toString().trim();
 
-//            model.getAuth().createUserWithEmailAndPassword(email, password)
-//                    .addOnSuccessListener(authResult -> {
-//                        FirebaseUser firebaseUser = authResult.getUser();
-//                        if (firebaseUser != null) {
-//                            // Создаем объект пользователя
-//                            User user = new User(name, lastName, age);
-//                            // Записываем данные в базу данных Firebase
-//                            databaseReference.child("users").child(firebaseUser.getUid()).setValue(user)
-//                                    .addOnSuccessListener(aVoid -> {
-//                                        // Пользователь успешно добавлен в базу данных
-//                                        Toast.makeText(RegistrationActivity.this,
-//                                                R.string.was_successful_added, Toast.LENGTH_LONG).show();
-//                                    })
-//                                    .addOnFailureListener(e -> {
-//                                        // Обработка ошибки
-//                                        Toast.makeText(RegistrationActivity.this,
-//                                                e.getMessage(), Toast.LENGTH_LONG).show();
-//                                    });
-//                        }
-//
-//                        Toast.makeText(RegistrationActivity.this,
-//                                authResult.getAdditionalUserInfo()
-//                                        .getUsername() + R.string.was_successful_added
-//                                , Toast.LENGTH_LONG).show()
-//                    });
+            model.getAuth().createUserWithEmailAndPassword(email, password)
+                    .addOnSuccessListener(authResult -> {
+
+                        Intent intent = UsersActivity.createIntent(RegistrationActivity.this);
+                        startActivity(intent);
+                    });
         });
+
     }
 
     private void initViews() {

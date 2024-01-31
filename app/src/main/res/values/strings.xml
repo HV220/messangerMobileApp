@@ -14,4 +14,5 @@
     <string name="lastNameHint">Введите вашу фамилию</string>
     <string name="oldHint">Введите ваш возраст</string>
     <string name="was_successful_added">был успешно добавлен.</string>
+    <string name="change_password">Сменить пароль</string>
 </resources>
