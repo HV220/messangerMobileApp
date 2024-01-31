@@ -47,16 +47,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         registration.setOnClickListener(v -> {
-            String userEmail = editTextTextEmailAddress.getText().toString();
-            String userPassword = editTextTextPassword.getText().toString();
-
-            modelView.getAuth().createUserWithEmailAndPassword(userEmail, userPassword)
-                    .addOnSuccessListener(authResult ->
-                            Toast.makeText(MainActivity.this, authResult.toString(),
-                                    Toast.LENGTH_LONG).show())
-                    .addOnFailureListener(e -> {
-
-                    });
+            Intent intent = RegistrationActivity.createIntent(MainActivity.this);
+            startActivity(intent);
         });
 
         resetPassword.setOnClickListener(v -> {

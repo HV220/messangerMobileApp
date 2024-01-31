@@ -1,10 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">messanger</string>
-    <string name="email">Введите email</string>
-    <string name="password">Введите пароль</string>
+    <string name="app_name">Мессенджер</string>
+    <string name="email">Введите ваш email</string>
+    <string name="password">Введите ваш пароль</string>
     <string name="enter">Войти</string>
-    <string name="forgotPassword">Забыли пароль</string>
+    <string name="forgotPassword">Забыли пароль?</string>
     <string name="registration">Регистрация</string>
-    <string name="messengerTitle">Messenger</string>
-    <string name="logOut">Разлогинится</string>
+    <string name="messengerTitle">Мессенджер</string>
+    <string name="logOut">Выйти</string>
+    <string name="registrationTitle">Регистрация</string>
+    <string name="registrationButton">Зарегистрироваться</string>
+    <string name="nameHint">Введите ваше имя</string>
+    <string name="lastNameHint">Введите вашу фамилию</string>
+    <string name="oldHint">Введите ваш возраст</string>
+    <string name="was_successful_added">был успешно добавлен.</string>
 </resources>
