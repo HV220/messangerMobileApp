@@ -28,18 +28,21 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         button.setOnClickListener(v -> {
                     String userEmail = resetEmailActivity.getText().toString();
-                    if (!userEmail.equals("")) {
-                        modelView.getAuth()
-                                .sendPasswordResetEmail(userEmail)
-                                .addOnSuccessListener(unused ->
-                                        Toast.makeText(ResetPasswordActivity.this
-                                                , "Password was successfully changed"
-                                                , Toast.LENGTH_LONG).show())
-                                .addOnFailureListener(e ->
-                                        Toast.makeText(ResetPasswordActivity.this,
-                                                e.getMessage(), Toast.LENGTH_LONG).show())
-                        ;
+
+                    if (userEmail.equals("")) {
+                        Toast.makeText(ResetPasswordActivity.this, R.string.fillFields, Toast.LENGTH_SHORT).show();
+                        return;
                     }
+
+                    modelView.getAuth()
+                            .sendPasswordResetEmail(userEmail)
+                            .addOnSuccessListener(unused ->
+                                    Toast.makeText(ResetPasswordActivity.this
+                                            , "Password was successfully changed"
+                                            , Toast.LENGTH_LONG).show())
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(ResetPasswordActivity.this,
+                                            e.getMessage(), Toast.LENGTH_LONG).show());
                 }
         );
 

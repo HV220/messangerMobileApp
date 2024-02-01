@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.messanger.R;
@@ -39,11 +40,16 @@ public class RegistrationActivity extends AppCompatActivity {
 
         buttonRegistration.setOnClickListener(v -> {
 
-            String email = editTextTextEmailAddress.getText().toString().trim();
-            String password = editTextTextPassword.getText().toString().trim();
-            String name = editTextName.getText().toString().trim();
-            String lastName = editTextTextLastName.getText().toString().trim();
-            String age = editTextOld.getText().toString().trim();
+            String email = getTrimmedText(editTextTextEmailAddress);
+            String password = getTrimmedText(editTextTextPassword);
+            String name = getTrimmedText(editTextName);
+            String lastName = getTrimmedText(editTextTextLastName);
+            String age = getTrimmedText(editTextOld);
+
+            if (email.equals("") || password.equals("") || name.equals("") || lastName.equals("") || age.equals("")) {
+                Toast.makeText(RegistrationActivity.this, R.string.fillFields, Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             model.getAuth().createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener(authResult -> {
@@ -72,5 +78,9 @@ public class RegistrationActivity extends AppCompatActivity {
         Intent intent = new Intent(context, RegistrationActivity.class);
 
         return intent;
+    }
+
+    private String getTrimmedText(TextView textView) {
+        return textView.getText().toString();
     }
 }

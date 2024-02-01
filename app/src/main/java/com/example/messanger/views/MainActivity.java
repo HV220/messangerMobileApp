@@ -35,12 +35,17 @@ public class MainActivity extends AppCompatActivity {
             String userEmail = editTextTextEmailAddress.getText().toString();
             String userPassword = editTextTextPassword.getText().toString();
 
-            modelView.getAuth().signInWithEmailAndPassword(userEmail, userPassword)
-                    .addOnSuccessListener(authResult -> {
-                        Intent intent = UsersActivity.createIntent(this);
-                        startActivity(intent);
-                    })
-                    .addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show());
+            if (userEmail.equals("") || userPassword.equals("")) {
+                Toast.makeText(MainActivity.this, R.string.fillFields, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+                modelView.getAuth().signInWithEmailAndPassword(userEmail, userPassword)
+                        .addOnSuccessListener(authResult -> {
+                            Intent intent = UsersActivity.createIntent(this);
+                            startActivity(intent);
+                        })
+                        .addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show());
         });
 
         registration.setOnClickListener(v -> {
