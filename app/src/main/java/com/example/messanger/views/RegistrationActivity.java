@@ -51,12 +51,17 @@ public class RegistrationActivity extends AppCompatActivity {
                 return;
             }
 
-            model.getAuth().createUserWithEmailAndPassword(email, password)
-                    .addOnSuccessListener(authResult -> {
+            model.login(email, password);
 
-                        Intent intent = UsersActivity.createIntent(RegistrationActivity.this);
-                        startActivity(intent);
-                    });
+            model.getError().observe(this,
+                    s -> Toast.makeText(RegistrationActivity.this, s, Toast.LENGTH_SHORT).show());
+
+            model.getUser().observe(RegistrationActivity.this, user -> {
+                if (user!= null) {
+                    Intent intent = UsersActivity.createIntent(RegistrationActivity.this);
+                    startActivity(intent);
+                }
+            });
         });
 
     }

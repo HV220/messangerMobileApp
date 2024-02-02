@@ -33,10 +33,13 @@ public class UsersActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.logOut){
-            model.getAuth().signOut();
-            Intent intent = MainActivity.createIntent(UsersActivity.this);
-            startActivity(intent);
+        if (item.getItemId() == R.id.logOut) {
+            model.logOut();
+            model.getIsLogOutSuccess().observe(UsersActivity.this, aBoolean -> {
+                Intent intent = LoginActivity.createIntent(UsersActivity.this);
+                startActivity(intent);
+            });
+
         }
         return super.onOptionsItemSelected(item);
     }
