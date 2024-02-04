@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="3dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
         tools:ignore="UseCompoundDrawables">
 
@@ -19,10 +20,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="5dp"
-            android:padding="10dp"
+            android:padding="15dp"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:drawableEndCompat="@android:drawable/ic_notification_overlay"
             tools:text="Name user and age" />
+
+        <ImageView
+            android:id="@+id/isOnlineImage"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_margin="16dp"
+            tools:src="@drawable/circle_red"
+            android:importantForAccessibility="no" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.messanger.R;
 
 import com.example.messanger.viewModels.RegistrationViewModel;
+
 public class RegistrationActivity extends AppCompatActivity {
     private RegistrationViewModel model;
     private TextView editTextTextEmailAddress;
@@ -34,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity {
         observeViewModel();
         setupClickListeners();
     }
+
     private void setupClickListeners() {
         buttonRegistration.setOnClickListener(v -> {
 
@@ -53,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         , Toast.LENGTH_SHORT).show();
                 return;
             }
-            model.createUser(email, password);
+            model.createUser(email, password, name, lastName, age);
         });
     }
 

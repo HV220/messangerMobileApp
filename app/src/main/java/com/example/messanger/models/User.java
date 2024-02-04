@@ -4,19 +4,37 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class User {
-    private static User instance;
+    private String id;
     private String name;
     private String lastName;
     private int age;
 
-    private User() {
-
-    }
-
-    private User(String name, String lastName, int age) {
+    private Boolean isOnline;
+    public User(String id, String name, String lastName, int age, Boolean isOnline) {
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
+        this.isOnline = isOnline;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Boolean getOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(Boolean online) {
+        isOnline = online;
+    }
+    public User() {
+
     }
 
     public String getName() {
@@ -50,13 +68,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 '}';
-    }
-
-    public static User getInstance() {
-        if (instance == null) {
-            instance = new User();
-        }
-        return instance;
     }
 }
 

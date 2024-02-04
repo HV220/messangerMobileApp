@@ -24,14 +24,20 @@ public class RegistrationViewModel extends AndroidViewModel {
             }
         });
     }
+
     public LiveData<FirebaseUser> getUser() {
         return user;
     }
+
     public LiveData<String> getError() {
         return error;
     }
 
-    public void createUser(String eMail, String password) {
+    public void createUser(String eMail,
+                           String password,
+                           String name,
+                           String lastName,
+                           String age) {
         auth.createUserWithEmailAndPassword(eMail, password)
                 .addOnSuccessListener(authResult -> user.setValue(authResult.getUser()))
                 .addOnFailureListener(e -> error.setValue(e.getMessage()));
