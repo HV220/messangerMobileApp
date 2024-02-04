@@ -10,22 +10,12 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginViewModel extends AndroidViewModel {
-
+public class RegistrationViewModel extends AndroidViewModel {
     private final FirebaseAuth auth;
+    private final MutableLiveData<FirebaseUser> user = new MutableLiveData<>();
     private final MutableLiveData<String> error = new MutableLiveData<>();
 
-    private final MutableLiveData<FirebaseUser> user = new MutableLiveData<>();
-
-    public LiveData<FirebaseUser> getUser() {
-        return user;
-    }
-
-    public LiveData<String> getError() {
-        return error;
-    }
-
-    public LoginViewModel(@NonNull Application application) {
+    public RegistrationViewModel(@NonNull Application application) {
         super(application);
         auth = FirebaseAuth.getInstance();
         auth.addAuthStateListener(firebaseAuth -> {
@@ -34,11 +24,16 @@ public class LoginViewModel extends AndroidViewModel {
             }
         });
     }
+    public LiveData<FirebaseUser> getUser() {
+        return user;
+    }
+    public LiveData<String> getError() {
+        return error;
+    }
 
-    public void login(String eMail, String password) {
-        auth.signInWithEmailAndPassword(eMail, password)
+    public void createUser(String eMail, String password) {
+        auth.createUserWithEmailAndPassword(eMail, password)
                 .addOnSuccessListener(authResult -> user.setValue(authResult.getUser()))
                 .addOnFailureListener(e -> error.setValue(e.getMessage()));
     }
-
 }

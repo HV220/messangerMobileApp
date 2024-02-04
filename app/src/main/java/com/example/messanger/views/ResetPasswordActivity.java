@@ -11,10 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.messanger.R;
-import com.example.messanger.viewModels.LoginViewModel;
+import com.example.messanger.viewModels.ResetPasswordViewModel;
 
 public class ResetPasswordActivity extends AppCompatActivity {
-    LoginViewModel modelView;
+    ResetPasswordViewModel modelView;
     private final static String TAG_EMAIL = "email";
     private TextView resetEmailActivity;
     private Button button;
@@ -25,11 +25,16 @@ public class ResetPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reset_password);
 
         initViews();
+        observeViewModel();
+        setupClickListeners();
 
         String mail = getIntent().getStringExtra(TAG_EMAIL);
 
         resetEmailActivity.setText(mail);
 
+
+    }
+    private void setupClickListeners() {
         button.setOnClickListener(v -> {
                     String userEmail = resetEmailActivity.getText().toString();
 
@@ -38,32 +43,32 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                 R.string.fillFields, Toast.LENGTH_SHORT).show();
                         return;
                     }
-
                     modelView.resetPassword(userEmail);
-                    modelView.getIsResetSendMailSuccess()
-                            .observe(ResetPasswordActivity.this, aBoolean ->
-                                    Toast.makeText(ResetPasswordActivity.this
-                                            , "Email lent to "
-                                            , Toast.LENGTH_LONG).show());
-                    modelView.getError().observe(ResetPasswordActivity.this,
-                            s -> Toast.makeText(ResetPasswordActivity.this
-                                    , s
-                                    , Toast.LENGTH_LONG).show());
-
                 }
         );
+    }
+    private void observeViewModel() {
 
+        modelView.getIsResetSendMailSuccess()
+                .observe(ResetPasswordActivity.this, aBoolean ->
+                        Toast.makeText(ResetPasswordActivity.this
+                                , "Email lent to "
+                                , Toast.LENGTH_LONG).show());
+        modelView.getError().observe(ResetPasswordActivity.this,
+                s -> Toast.makeText(ResetPasswordActivity.this
+                        , s
+                        , Toast.LENGTH_LONG).show());
+    }
+
+    private void initViews() {
+        modelView = new ViewModelProvider(this).get(ResetPasswordViewModel.class);
+        resetEmailActivity = findViewById(R.id.resetEmailActivity);
+        button = findViewById(R.id.resetButton);
     }
 
     public static Intent createIntent(Context context, String eMail) {
         Intent intent = new Intent(context, ResetPasswordActivity.class);
         intent.putExtra(TAG_EMAIL, eMail);
         return intent;
-    }
-
-    private void initViews() {
-        modelView = new ViewModelProvider(this).get(LoginViewModel.class);
-        resetEmailActivity = findViewById(R.id.resetEmailActivity);
-        button = findViewById(R.id.resetButton);
     }
 }
