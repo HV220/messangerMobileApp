@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.messanger.R;
-import com.example.messanger.models.controllers.AuthenticationModelView;
+import com.example.messanger.viewModels.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -22,18 +23,16 @@ public class LoginActivity extends AppCompatActivity {
     private TextView registration;
     private Button button;
 
-    AuthenticationModelView modelView;
+    LoginViewModel modelView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        modelView = new ViewModelProvider(this).get(AuthenticationModelView.class);
+        modelView = new ViewModelProvider(this).get(LoginViewModel.class);
         initViews();
         observeViewModel();
         setupClickListeners();
-
-
     }
 
     private void initViews() {
@@ -48,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         modelView.getError().observe(this,
                 s -> {
                     if (s != null) {
+                        Log.d(LOG_TAG, s);
                         Toast.makeText(LoginActivity.this, s, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -81,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         resetPassword.setOnClickListener(v -> {
-
             Intent intent = ResetPasswordActivity.createIntent(LoginActivity.this
                     , editTextTextEmailAddress.getText().toString());
             startActivity(intent);

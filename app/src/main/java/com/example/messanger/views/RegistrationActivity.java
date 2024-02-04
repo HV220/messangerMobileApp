@@ -14,21 +14,18 @@ import android.widget.Toast;
 
 
 import com.example.messanger.R;
-import com.example.messanger.models.controllers.AuthenticationModelView;
+import com.example.messanger.viewModels.LoginViewModel;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistrationActivity extends AppCompatActivity {
-    private AuthenticationModelView model;
+    private LoginViewModel model;
     private TextView editTextTextEmailAddress;
     private TextView editTextTextPassword;
     private TextView editTextName;
     private TextView editTextTextLastName;
     private TextView editTextOld;
-
-
-    private DatabaseReference databaseReference;
     private Button buttonRegistration;
 
     @Override
@@ -51,10 +48,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 return;
             }
 
-            model.login(email, password);
+            model.createUser(email, password);
 
             model.getError().observe(this,
-                    s -> Toast.makeText(RegistrationActivity.this, s, Toast.LENGTH_SHORT).show());
+                    s -> {
+                        Toast.makeText(RegistrationActivity.this, s, Toast.LENGTH_SHORT).show();
+
+                    });
 
             model.getUser().observe(RegistrationActivity.this, user -> {
                 if (user!= null) {
@@ -67,9 +67,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        model = new ViewModelProvider(RegistrationActivity.this).get(AuthenticationModelView.class);
-
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        model = new ViewModelProvider(RegistrationActivity.this).get(LoginViewModel.class);
 
         editTextTextEmailAddress = findViewById(R.id.editTextTextEmailAddress);
         editTextTextPassword = findViewById(R.id.editTextTextPassword);

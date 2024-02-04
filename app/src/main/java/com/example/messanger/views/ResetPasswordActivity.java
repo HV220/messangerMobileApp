@@ -1,7 +1,6 @@
 package com.example.messanger.views;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -12,10 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.messanger.R;
-import com.example.messanger.models.controllers.AuthenticationModelView;
+import com.example.messanger.viewModels.LoginViewModel;
 
 public class ResetPasswordActivity extends AppCompatActivity {
-    AuthenticationModelView modelView;
+    LoginViewModel modelView;
     private final static String TAG_EMAIL = "email";
     private TextView resetEmailActivity;
     private Button button;
@@ -63,7 +62,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        modelView = new ViewModelProvider(this).get(AuthenticationModelView.class);
+        modelView = new ViewModelProvider(this).get(LoginViewModel.class);
         resetEmailActivity = findViewById(R.id.resetEmailActivity);
         button = findViewById(R.id.resetButton);
     }

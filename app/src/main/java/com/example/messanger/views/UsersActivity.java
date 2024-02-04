@@ -11,18 +11,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.messanger.R;
-import com.example.messanger.models.controllers.AuthenticationModelView;
+import com.example.messanger.viewModels.UsersViewModel;
 
 public class UsersActivity extends AppCompatActivity {
-    AuthenticationModelView model;
+    UsersViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
         initViews();
-
-
+        observeViewModel();
     }
 
     @Override
@@ -35,17 +34,21 @@ public class UsersActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.logOut) {
             model.logOut();
-            model.getIsLogOutSuccess().observe(UsersActivity.this, aBoolean -> {
-                Intent intent = LoginActivity.createIntent(UsersActivity.this);
-                startActivity(intent);
-            });
-
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void observeViewModel() {
+        model.getUser().observe(UsersActivity.this, firebaseUser -> {
+            if (firebaseUser == null) {
+                Intent intent = LoginActivity.createIntent(UsersActivity.this);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
     private void initViews() {
-        model = new ViewModelProvider(UsersActivity.this).get(AuthenticationModelView.class);
+        model = new ViewModelProvider(UsersActivity.this).get(UsersViewModel.class);
     }
 
     public static Intent createIntent(Context context) {

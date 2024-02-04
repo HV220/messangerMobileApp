@@ -1,4 +1,4 @@
-package com.example.messanger.models.controllers;
+package com.example.messanger.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
