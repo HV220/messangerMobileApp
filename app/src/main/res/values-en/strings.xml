@@ -16,4 +16,6 @@
     <string name="was_successful_added">was successfully added.</string>
     <string name="change_password">Change password</string>
     <string name="fillFields">Please fill in the fields.</string>
+    <string name="messageHint">Input your message:</string>
+    <string name="hintImageSendMessage">Button of send message.</string>
 </resources>

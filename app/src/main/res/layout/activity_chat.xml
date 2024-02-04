@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#10000099"
+    tools:context=".views.ChatActivity">
+
+    <TextView
+        android:id="@+id/titleOwnerChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/message_bg"
+        android:padding="16dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Andru Zaharov" />
+
+    <View
+        android:id="@+id/statusView"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="titleText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/titleOwnerChat"
+        tools:background="@drawable/circle_green" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messagesRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="messageIconEditView"
+        app:layout_constraintTop_toBottomOf="@id/titleOwnerChat"
+        tools:listitem="@layout/my_message_item" />
+
+    <EditText
+        android:id="@+id/messageIconEditView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="@string/messageHint"
+        android:background="@color/white"
+        android:hint="@string/messageHint"
+        android:inputType="textMultiLine"
+        android:maxHeight="200dp"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="48dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="ffffffffffffffffffffffffffffff
+        ffffffffffffffffffffff
+        fffffffffffffffffffff
+        fffffffffffffffffffffffff
+        fffffffffffffffffffffffffff
+        ffffffffffffffffffffffffffffffffffffffffffff
+        fffffffffffffffffffff" />
+
+    <ImageView
+        android:id="@+id/action_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/hintImageSendMessage"
+        app:layout_constraintBottom_toBottomOf="@id/messageIconEditView"
+        app:layout_constraintEnd_toEndOf="@id/messageIconEditView"
+        app:layout_constraintTop_toTopOf="@id/messageIconEditView"
+        app:srcCompat="@android:drawable/ic_menu_send"
+        app:tint="@color/message_bg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

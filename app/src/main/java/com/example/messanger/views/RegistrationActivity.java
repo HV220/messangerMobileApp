@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private TextView editTextTextLastName;
     private TextView editTextOld;
     private Button buttonRegistration;
+    private static final String TAG = "RegistrationActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,28 +38,32 @@ public class RegistrationActivity extends AppCompatActivity {
         setupClickListeners();
     }
 
+
     private void setupClickListeners() {
         buttonRegistration.setOnClickListener(v -> {
-
             String email = getTrimmedText(editTextTextEmailAddress);
             String password = getTrimmedText(editTextTextPassword);
             String name = getTrimmedText(editTextName);
             String lastName = getTrimmedText(editTextTextLastName);
-            String age = getTrimmedText(editTextOld);
+            String ageText = getTrimmedText(editTextOld);
 
-            if (email.equals("") ||
-                    password.equals("") ||
-                    name.equals("") ||
-                    lastName.equals("") ||
-                    age.equals("")) {
-                Toast.makeText(RegistrationActivity.this
-                        , R.string.fillFields
-                        , Toast.LENGTH_SHORT).show();
+            if (email.isEmpty() || password.isEmpty() || name.isEmpty() || lastName.isEmpty() || ageText.isEmpty()) {
+                Toast.makeText(RegistrationActivity.this, R.string.fillFields, Toast.LENGTH_SHORT).show();
                 return;
             }
-            model.createUser(email, password, name, lastName, age);
+            int addedAge;
+            try {
+                addedAge = Integer.parseInt(ageText);
+            } catch (NumberFormatException e) {
+                Log.d(TAG, "NumberFormatException: " + e.getMessage());
+                Toast.makeText(RegistrationActivity.this, "Please enter a valid age.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            model.createUser(email, password, name, lastName, addedAge);
         });
     }
+
 
     private void observeViewModel() {
         model.getError().observe(this,

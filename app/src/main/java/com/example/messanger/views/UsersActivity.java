@@ -18,7 +18,7 @@ import com.example.messanger.viewModels.UsersViewModel;
 public class UsersActivity extends AppCompatActivity {
     UsersViewModel model;
 
-    UsersAdapter users;
+    UsersAdapter usersAdapter;
     RecyclerView usersRecycle;
 
     @Override
@@ -26,7 +26,6 @@ public class UsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
         model = new ViewModelProvider(UsersActivity.this).get(UsersViewModel.class);
-
         initViews();
         observeViewModel();
     }
@@ -53,12 +52,14 @@ public class UsersActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        model.getUsers().observe(UsersActivity.this, users -> usersAdapter.setUsers(users));
     }
 
     private void initViews() {
-        users = new UsersAdapter();
+        usersAdapter = new UsersAdapter();
         usersRecycle = findViewById(R.id.usersRecycler);
-        usersRecycle.setAdapter(users);
+        usersRecycle.setAdapter(usersAdapter);
     }
 
     public static Intent createIntent(Context context) {

@@ -16,4 +16,6 @@
     <string name="was_successful_added">был успешно добавлен.</string>
     <string name="change_password">Сменить пароль</string>
     <string name="fillFields">Пожалуйста, заполните поля.</string>
+    <string name="messageHint">Введите своё сообщение: </string>
+    <string name="hintImageSendMessage">Кнопка отправить сообщение.</string>
 </resources>

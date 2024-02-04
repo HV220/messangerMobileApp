@@ -1,8 +1,4 @@
 package com.example.messanger.models;
-
-import com.google.firebase.database.IgnoreExtraProperties;
-
-@IgnoreExtraProperties
 public class User {
     private String id;
     private String name;
@@ -36,7 +32,6 @@ public class User {
     public User() {
 
     }
-
     public String getName() {
         return name;
     }
