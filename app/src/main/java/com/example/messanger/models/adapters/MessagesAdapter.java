@@ -27,6 +27,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         return null;
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
 
