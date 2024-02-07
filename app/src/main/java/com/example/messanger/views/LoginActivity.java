@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
         modelView.getUser().observe(LoginActivity.this, user -> {
             if (user != null) {
-                Intent intent = UsersActivity.createIntent(LoginActivity.this);
+                Intent intent = UsersActivity.createIntent(LoginActivity.this, user.getUid());
                 startActivity(intent);
                 finish();
             }

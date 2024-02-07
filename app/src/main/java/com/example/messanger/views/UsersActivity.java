@@ -12,10 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.messanger.R;
+import com.example.messanger.models.User;
 import com.example.messanger.models.adapters.UsersAdapter;
 import com.example.messanger.viewModels.UsersViewModel;
 
 public class UsersActivity extends AppCompatActivity {
+    private static final String EXTRA_CURRENT_USER_ID = "current_user_id";
+    private String currentUserId;
     UsersViewModel model;
 
     UsersAdapter usersAdapter;
@@ -26,6 +29,7 @@ public class UsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
         model = new ViewModelProvider(UsersActivity.this).get(UsersViewModel.class);
+        currentUserId = getIntent().getStringExtra(EXTRA_CURRENT_USER_ID);
         initViews();
         observeViewModel();
     }
@@ -52,6 +56,10 @@ public class UsersActivity extends AppCompatActivity {
                 finish();
             }
         });
+        usersAdapter.setUserClickListener(user -> {
+            Intent intent = ChatActivity.newIntent(UsersActivity.this, currentUserId, user.getId());
+            startActivity(intent);
+        });
 
         model.getUsers().observe(UsersActivity.this, users -> usersAdapter.setUsers(users));
     }
@@ -62,8 +70,9 @@ public class UsersActivity extends AppCompatActivity {
         usersRecycle.setAdapter(usersAdapter);
     }
 
-    public static Intent createIntent(Context context) {
+    public static Intent createIntent(Context context, String currentUserId) {
         Intent intent = new Intent(context, UsersActivity.class);
+        intent.putExtra(EXTRA_CURRENT_USER_ID, currentUserId);
         return intent;
     }
 }
