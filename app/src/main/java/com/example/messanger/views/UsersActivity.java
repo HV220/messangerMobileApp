@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.messanger.R;
-import com.example.messanger.models.User;
 import com.example.messanger.models.adapters.UsersAdapter;
 import com.example.messanger.viewModels.UsersViewModel;
 
@@ -61,7 +61,10 @@ public class UsersActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        model.getUsers().observe(UsersActivity.this, users -> usersAdapter.setUsers(users));
+        model.getUsers().observe(UsersActivity.this, users -> {
+            Log.d("Users", users.toString());
+            usersAdapter.setUsers(users);
+        });
     }
 
     private void initViews() {

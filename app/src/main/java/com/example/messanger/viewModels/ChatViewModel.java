@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.messanger.models.Message;
 import com.example.messanger.models.User;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,16 +53,16 @@ public class ChatViewModel extends ViewModel {
     }
 
     public void sendMessage(Message message) {
-        referenceUsers
+        referenceMessages
                 .child(message.getSenderId())
                 .child(message.getReceiverId())
                 .push()
-                .setValue(message.getTextMessage())
-                .addOnSuccessListener(unused -> referenceUsers
+                .setValue(message)
+                .addOnSuccessListener(unused -> referenceMessages
                         .child(message.getReceiverId())
                         .child(message.getSenderId())
                         .push()
-                        .setValue(message.getTextMessage())
+                        .setValue(message)
                         .addOnSuccessListener(unused1 -> isMessageSent.setValue(true))
                         .addOnFailureListener(e -> isMessageSent.setValue(false)))
                 .addOnFailureListener(e -> isMessageSent.setValue(false));
@@ -86,7 +84,7 @@ public class ChatViewModel extends ViewModel {
 
                     }
                 });
-        referenceUsers
+        referenceMessages
                 .child(currentUserId)
                 .child(otherUserId)
                 .addValueEventListener(new ValueEventListener() {
