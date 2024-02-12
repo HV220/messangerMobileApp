@@ -44,6 +44,7 @@ public class UsersActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.logOut) {
             model.logOut();
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -77,5 +78,17 @@ public class UsersActivity extends AppCompatActivity {
         Intent intent = new Intent(context, UsersActivity.class);
         intent.putExtra(EXTRA_CURRENT_USER_ID, currentUserId);
         return intent;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        model.setOnUserOnline(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        model.setOnUserOnline(false);
     }
 }

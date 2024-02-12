@@ -1,12 +1,14 @@
 package com.example.messanger.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -92,7 +94,19 @@ public class ChatActivity extends AppCompatActivity {
         chatViewModel.getOtherUser().observe(this, user -> {
             String nameOwner = String.format("%s %s", user.getName(), user.getLastName());
             titleOwnerChat.setText(nameOwner);
+
+            int bgResId;
+            if (user.getOnline()) {
+                bgResId = R.drawable.circle_green;
+            } else {
+                bgResId = R.drawable.circle_red;
+            }
+            Drawable image = ContextCompat.getDrawable(this, bgResId);
+
+            statusView.setBackground(image);
         });
+
+
     }
 
     private void initViews() {
@@ -110,5 +124,17 @@ public class ChatActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_OTHER_USER_ID, otherUserId);
 
         return intent;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        chatViewModel.setOnUserOnline(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        chatViewModel.setOnUserOnline(false);
     }
 }

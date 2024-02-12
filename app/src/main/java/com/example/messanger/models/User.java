@@ -1,17 +1,22 @@
 package com.example.messanger.models;
+
 public class User {
     private String id;
     private String name;
     private String lastName;
     private int age;
 
-    private Boolean isOnline;
-    public User(String id, String name, String lastName, int age, Boolean isOnline) {
+    private Boolean online;
+
+    public User() {
+    }
+
+    public User(String id, String name, String lastName, int age, Boolean online) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
-        this.isOnline = isOnline;
+        this.online = online;
     }
 
     public String getId() {
@@ -23,15 +28,13 @@ public class User {
     }
 
     public Boolean getOnline() {
-        return isOnline;
+        return this.online;
     }
 
     public void setOnline(Boolean online) {
-        isOnline = online;
+        this.online = online;
     }
-    public User() {
 
-    }
     public String getName() {
         return name;
     }
@@ -59,9 +62,11 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
+                ", online=" + online +
                 '}';
     }
 }

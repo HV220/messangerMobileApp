@@ -46,7 +46,17 @@ public class UsersViewModel extends AndroidViewModel {
     }
 
     public void logOut() {
+        setOnUserOnline(false);
         auth.signOut();
+    }
+
+    public void setOnUserOnline(boolean userOnline) {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user == null) return;
+
+        databaseReference.child(user.getUid())
+                .child("online")
+                .setValue(userOnline);
     }
 
     private void loadUsersFromDB() {
