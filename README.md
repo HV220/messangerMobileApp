@@ -1,4 +1,4 @@
-# ✨ QuickChat Messenger - Connect Without Boundaries! ✨
+# ✨ QuickChat Messenger - Connect Without Boundaries!
 
 ## 🚀 Description
 QuickChat is a cutting-edge instant messaging app that lets you stay in touch with friends and family no matter where you are. Powered by the robust Firebase library, QuickChat provides fast and secure real-time communication. Discover a new level of interaction with QuickChat!
