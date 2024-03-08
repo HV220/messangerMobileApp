@@ -30,3 +30,23 @@ QuickChat is a cutting-edge instant messaging app that lets you stay in touch wi
 - All data is secured with Firebase's advanced security technologies.
 
 ## 📲 Download QuickChat today and start experiencing communication in a whole new way!
+
+## Important Note Regarding google-services.json
+
+If you encounter the :app:processDebugGoogleServices error during the build process, it's likely due to the absence of the google-services.json file, which is essential for the Google Services Plugin to function properly.
+
+To fix this issue:
+
+1. Obtain the google-services.json file:
+   - Navigate to the Firebase Console (https://console.firebase.google.com/).
+   - Select your project or create a new one if necessary.
+   - Click on 'Add app' and follow the setup instructions.
+   - At the end of the setup process, you'll be able to download the google-services.json file.
+
+2. Add the google-services.json file to your project:
+   - Place the google-services.json file in the app/ directory of your Android project.
+
+3. Ensure the file is not tracked by Git:
+   - Add google-services.json to your .gitignore file to prevent it from being committed to your public repository, as it contains sensitive information.
+
+By following these steps, you should be able to resolve the build error and securely integrate Google Services into your application.
