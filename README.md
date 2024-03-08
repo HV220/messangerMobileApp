@@ -50,3 +50,6 @@ To fix this issue:
    - Add google-services.json to your .gitignore file to prevent it from being committed to your public repository, as it contains sensitive information.
 
 By following these steps, you should be able to resolve the build error and securely integrate Google Services into your application.
+
+https://github.com/HV220/messangerMobileApp/assets/96989018/d2d4d8ad-cd4e-4f9b-a45f-fd32e754b1b5
+
